@@ -116,8 +116,63 @@ def d3():
     print(f'part2: {min(total_steps_list)}')
 
 
+def d4():
+    inp = '128392-643281'
+    inp = inp.split('-')
+
+    def rules(no):
+        no = str(no)
+        flag = False
+        for i, item in enumerate(no):
+            if i < 5:
+                if no[i] > no[i+1]:
+                    return False
+                elif no[i] == no[i+1]:
+                    flag = True
+        return flag
+
+    valid_pass = []
+    for i in range(int(inp[0]), int(inp[1])):
+        if rules(i):
+            valid_pass.append(i)
+    print(f'part1: {len(valid_pass)}')
+
+    def r1(no):
+        no = str(no)
+        for i, item in enumerate(no):
+            if i < 5:
+                if no[i] > no[i+1]:
+                    return False
+        return True
+
+    def r2(no):
+        no = str(no)
+        i = 0
+        while i < 5:
+            if no[i] == no[i + 1]:
+                if i == 4:
+                    return True
+                elif no[i+2] == no[i]:
+                    i = i + 2
+                    while i < 5:
+                        if no[i] == no[i+1]:
+                            i += 1
+                        else:
+                            break
+                else:
+                    return True
+            i += 1
+        return False
+
+    valid_pass = []
+    for i in range(int(inp[0]), int(inp[1])):
+        if r1(i) and r2(i):
+            valid_pass.append(i)
+    print(f'part2: {len(valid_pass)}')
+
+
 if __name__ == "__main__":
-    d3()
+    d4()
 
 
 
